@@ -71,7 +71,67 @@ def calc_tax(salary, severance_pay):
     out_netIncome = salary + severance_pay - out_totalTax_WF
     out_netIncome_cent = ( out_netIncome / (salary+severance_pay) ) * 100
 
-    print(taxSevOnly)
+    return out_totalTax_WF
 
 
+def calc_sevonly(salary, severance_pay):
+    #Adjust the income
+    taxbase = calculate_tax(salary)
+    taxbase_joint = calculate_split_tax(salary)
+    taxSevOnly = (calculate_split_tax(salary + severance_pay/5) - taxbase_joint) * 5
+    out_totalTax_WF = (taxSevOnly + taxbase_joint) * 1.05
+    out_netIncome = salary + severance_pay - out_totalTax_WF
+    out_netIncome_cent = ( out_netIncome / (salary+severance_pay) ) * 100
 
+    return taxSevOnly
+
+def calc_netIncome(salary, severance_pay):
+    #Adjust the income
+    taxbase = calculate_tax(salary)
+    taxbase_joint = calculate_split_tax(salary)
+    taxSevOnly = (calculate_split_tax(salary + severance_pay/5) - taxbase_joint) * 5
+    out_totalTax_WF = (taxSevOnly + taxbase_joint) * 1.05
+    out_netIncome = salary + severance_pay - out_totalTax_WF
+    out_netIncome_cent = ( out_netIncome / (salary+severance_pay) ) * 100
+
+    return out_netIncome
+
+def calc_netCent(salary, severance_pay):
+    #Adjust the income
+    taxbase = calculate_tax(salary)
+    taxbase_joint = calculate_split_tax(salary)
+    taxSevOnly = (calculate_split_tax(salary + severance_pay/5) - taxbase_joint) * 5
+    out_totalTax_WF = (taxSevOnly + taxbase_joint) * 1.05
+    out_netIncome = salary + severance_pay - out_totalTax_WF
+    out_netIncome_cent = ( out_netIncome / (salary+severance_pay) ) * 100
+
+    return out_netIncome_cent
+
+
+def calc_tax1(salary_list, severance_pay):
+    processed = []
+    for x in salary_list:
+        # Example processing: square each float
+        processed.append(calc_tax(x, severance_pay))
+    return processed
+
+def calc_sevonly1(salary_list, severance_pay):
+    processed = []
+    for x in salary_list:
+        # Example processing: square each float
+        processed.append(calc_sevonly(x, severance_pay))
+    return processed
+
+def calc_netIncome1(salary_list, severance_pay):
+    processed = []
+    for x in salary_list:
+        # Example processing: square each float
+        processed.append(calc_netIncome(x, severance_pay))
+    return processed
+
+def calc_netCent1(salary_list, severance_pay):
+    processed = []
+    for x in salary_list:
+        # Example processing: square each float
+        processed.append(calc_netCent(x, severance_pay))
+    return processed
